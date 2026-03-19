@@ -1,5 +1,7 @@
-import { $api } from "@/modules/common/api"
 import { useState } from "react"
+import { HouseIcon } from "@phosphor-icons/react"
+
+import { $api } from "@/modules/common/api"
 
 import {
   Card,
@@ -8,38 +10,18 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card"
+import { formatCurrency } from "./lib/currency"
 
 export function App() {
   const { data: products } = $api.useQuery("get", "/products")
   const [search, setSearch] = useState("")
-
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(value)
-  }
 
   return (
     <>
       <nav className="fixed top-0 left-0 z-50 w-full border-b border-white/20 bg-white/20 px-6 py-1 backdrop-blur-md backdrop-saturate-150">
         <div className="flex items-center justify-between">
           <button className="flex h-7 w-7 items-center justify-center rounded-full text-emerald-800 transition hover:bg-emerald-200/40">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />
-              <polyline points="9 21 9 12 15 12 15 21" />
-            </svg>
+            <HouseIcon size={32} />
           </button>
 
           <div className="flex items-center gap-2">
@@ -93,7 +75,7 @@ export function App() {
       <main className="p-6 pt-28 pb-28">
         <header className="mb-8">
           <img
-            src="https://4txzmei46w.ucarecd.net/8bd0acf7-4652-4b8d-8074-b26f53735fe4/racket_arena_header_adjusted.svg"
+            src="/assets/banner.svg"
             alt="Header Banner"
             className="h-64 w-full rounded-xl object-cover shadow-2xl"
           />
