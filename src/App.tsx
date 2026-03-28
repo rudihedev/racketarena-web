@@ -1,5 +1,6 @@
 import { $api } from "@/modules/common/api"
 import { useState } from "react"
+import banner from "@/assets/banner.svg"
 
 import {
   Card,
@@ -93,7 +94,7 @@ export function App() {
       <main className="p-6 pt-28 pb-28">
         <header className="mb-8">
           <img
-            src="https://4txzmei46w.ucarecd.net/8bd0acf7-4652-4b8d-8074-b26f53735fe4/racket_arena_header_adjusted.svg"
+            src={banner}
             alt="Header Banner"
             className="h-64 w-full rounded-xl object-cover shadow-2xl"
           />
