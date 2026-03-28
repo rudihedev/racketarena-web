@@ -1,6 +1,12 @@
 import { $api } from "@/modules/common/api"
 import { useState } from "react"
 import banner from "@/assets/banner.svg"
+import { formatCurrency } from "./lib/currency"
+import {
+  HouseIcon,
+  MagnifyingGlassIcon,
+  ShoppingCartIcon,
+} from "@phosphor-icons/react"
 
 import {
   Card,
@@ -14,52 +20,17 @@ export function App() {
   const { data: products } = $api.useQuery("get", "/products")
   const [search, setSearch] = useState("")
 
-  const formatCurrency = (value: number) => {
-    return new Intl.NumberFormat("id-ID", {
-      style: "currency",
-      currency: "IDR",
-      minimumFractionDigits: 0,
-    }).format(value)
-  }
-
   return (
     <>
       <nav className="fixed top-0 left-0 z-50 w-full border-b border-white/20 bg-white/20 px-6 py-1 backdrop-blur-md backdrop-saturate-150">
         <div className="flex items-center justify-between">
           <button className="flex h-7 w-7 items-center justify-center rounded-full text-emerald-800 transition hover:bg-emerald-200/40">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z" />
-              <polyline points="9 21 9 12 15 12 15 21" />
-            </svg>
+            <HouseIcon size={16} />
           </button>
 
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1.5 rounded-full border border-emerald-300/40 bg-white/40 px-2.5 py-1 backdrop-blur-sm">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="12"
-                height="12"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="text-emerald-700"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
+              <MagnifyingGlassIcon size={16} />
               <input
                 type="text"
                 placeholder="Search racket..."
@@ -70,22 +41,7 @@ export function App() {
             </div>
 
             <button className="flex h-7 w-7 items-center justify-center rounded-full text-emerald-800 transition hover:bg-emerald-200/40">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M6 2H3" />
-                <path d="M3 2l2 14h13l2-9H7" />
-                <circle cx="9" cy="20" r="1" />
-                <circle cx="18" cy="20" r="1" />
-              </svg>
+              <ShoppingCartIcon size={16} />
             </button>
           </div>
         </div>
