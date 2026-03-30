@@ -6,8 +6,6 @@ import {
   HouseIcon,
   MagnifyingGlassIcon,
   ShoppingCartIcon,
-  MinusIcon,
-  PlusIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -21,19 +19,6 @@ import {
 export function App() {
   const { data: products } = $api.useQuery("get", "/products")
   const [search, setSearch] = useState("")
-  const [quantities, setQuantities] = useState<Record<string, number>>({})
-
-  const getQty = (id: string) => quantities[id] ?? 1
-  const decreaseQty = (id: string) =>
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: Math.max(1, (prev[id] ?? 1) - 1),
-    }))
-  const increaseQty = (id: string, max: number) =>
-    setQuantities((prev) => ({
-      ...prev,
-      [id]: Math.min(max, (prev[id] ?? 1) + 1),
-    }))
 
   return (
     <>
@@ -111,48 +96,10 @@ export function App() {
                 </p>
               </CardHeader>
 
-              <CardFooter className="mt-auto flex items-center justify-between gap-2">
+              <CardFooter className="mt-auto">
                 <p className="text-lg font-bold text-primary">
                   {formatCurrency(product.price)}
                 </p>
-
-                <div
-                  className="flex items-center gap-1.5"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  {/* minus button */}
-                  <button
-                    onClick={() => decreaseQty(product.id)}
-                    disabled={product.stockQuantity === 0}
-                    className="flex h-6 w-6 items-center justify-center rounded-full border border-emerald-300 text-emerald-700 transition hover:bg-emerald-50 disabled:opacity-40"
-                  >
-                    <MinusIcon size={12} />
-                  </button>
-
-                  {/* quantity number */}
-                  <span className="w-5 text-center text-sm font-semibold">
-                    {getQty(product.id)}
-                  </span>
-
-                  {/* plus button */}
-                  <button
-                    onClick={() =>
-                      increaseQty(product.id, product.stockQuantity)
-                    }
-                    disabled={product.stockQuantity === 0}
-                    className="flex h-6 w-6 items-center justify-center rounded-full border border-emerald-300 text-emerald-700 transition hover:bg-emerald-50 disabled:opacity-40"
-                  >
-                    <PlusIcon size={12} />
-                  </button>
-
-                  {/* add to cart icon button */}
-                  <button
-                    disabled={product.stockQuantity === 0}
-                    className="flex h-7 w-7 items-center justify-center rounded-full bg-emerald-700 text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:opacity-50"
-                  >
-                    <ShoppingCartIcon size={14} />
-                  </button>
-                </div>
               </CardFooter>
             </Card>
           ))}
