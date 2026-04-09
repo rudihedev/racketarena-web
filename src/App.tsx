@@ -6,6 +6,7 @@ import {
   HouseIcon,
   MagnifyingGlassIcon,
   ShoppingCartIcon,
+  UserIcon,
 } from "@phosphor-icons/react"
 
 import {
@@ -15,6 +16,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card"
+import { Link } from "react-router-dom"
 
 export function App() {
   const { data: products } = $api.useQuery("get", "/products")
@@ -29,6 +31,14 @@ export function App() {
           </button>
 
           <div className="flex items-center gap-2">
+            <Link
+              to="/login"
+              className="flex items-center gap-1.5 rounded-full border border-emerald-300/40 bg-white/40 px-2.5 py-1 text-xs font-medium text-emerald-800 backdrop-blur-sm transition hover:bg-emerald-100/60"
+            >
+              <UserIcon size={14} />
+              Login
+            </Link>
+
             <div className="flex items-center gap-1.5 rounded-full border border-emerald-300/40 bg-white/40 px-2.5 py-1 backdrop-blur-sm">
               <MagnifyingGlassIcon size={16} />
               <input
@@ -107,7 +117,7 @@ export function App() {
       </main>
 
       <footer className="mt-8 w-full border-t border-white/20 bg-emerald-100/20 py-1 text-center text-xs font-medium text-emerald-950">
-        Copyright (c) Racket Arena, 2026
+        Copyright © Racket Arena, 2026
       </footer>
     </>
   )
