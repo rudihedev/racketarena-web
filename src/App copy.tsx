@@ -2,6 +2,8 @@ import { $api } from "@/modules/common/api"
 import { useState } from "react"
 import banner from "@/assets/banner.svg"
 import { formatCurrency } from "./lib/currency"
+import { Link } from "react-router-dom"
+
 import {
   HouseIcon,
   MagnifyingGlassIcon,
@@ -16,7 +18,6 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card"
-import { Link } from "react-router-dom"
 
 export function App() {
   const { data: products } = $api.useQuery("get", "/products")
