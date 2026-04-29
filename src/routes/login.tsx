@@ -1,16 +1,17 @@
 import { LoginForm } from "@/components/auth/login-form"
+import { useAuth } from "@/modules/auth/hooks"
 import { $api } from "@/modules/common/api"
 import { useNavigate } from "react-router"
 
 export function LoginRoute() {
+  const { setToken } = useAuth()
+
   const navigate = useNavigate()
 
   const { mutate } = $api.useMutation("post", "/auth/login", {
     onSuccess: (responseLogin) => {
       const { token } = responseLogin
-
-      console.log(token)
-
+      setToken(token)
       navigate("/dashboard")
     },
   })
