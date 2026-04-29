@@ -12,9 +12,16 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
 
-export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
+import { Input } from "@/components/ui/input"
+import { Link } from "react-router"
+
+export function RegisterForm({
+  handleSubmit,
+  ...props
+}: React.ComponentProps<typeof Card> & {
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void
+}) {
   return (
     <Card {...props}>
       <CardHeader>
@@ -24,38 +31,41 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form>
+        <form onSubmit={handleSubmit}>
           <FieldGroup>
             <Field>
               <FieldLabel htmlFor="name">Full Name</FieldLabel>
-              <Input id="name" type="text" placeholder="John Doe" required />
+              <Input
+                name="name"
+                id="name"
+                type="text"
+                placeholder="Your Name"
+                required
+              />
+            </Field>
+            <Field>
+              <FieldLabel htmlFor="username">Username</FieldLabel>
+              <Input
+                name="username"
+                id="username"
+                type="text"
+                placeholder="username"
+                required
+              />
             </Field>
             <Field>
               <FieldLabel htmlFor="email">Email</FieldLabel>
               <Input
+                name="email"
                 id="email"
                 type="email"
                 placeholder="m@example.com"
                 required
               />
-              <FieldDescription>
-                We&apos;ll use this to contact you. We will not share your email
-                with anyone else.
-              </FieldDescription>
             </Field>
             <Field>
               <FieldLabel htmlFor="password">Password</FieldLabel>
-              <Input id="password" type="password" required />
-              <FieldDescription>
-                Must be at least 8 characters long.
-              </FieldDescription>
-            </Field>
-            <Field>
-              <FieldLabel htmlFor="confirm-password">
-                Confirm Password
-              </FieldLabel>
-              <Input id="confirm-password" type="password" required />
-              <FieldDescription>Please confirm your password.</FieldDescription>
+              <Input name="password" id="password" type="password" required />
             </Field>
             <FieldGroup>
               <Field>
@@ -64,7 +74,7 @@ export function RegisterForm({ ...props }: React.ComponentProps<typeof Card>) {
                   Sign up with Google
                 </Button>
                 <FieldDescription className="px-6 text-center">
-                  Already have an account? <a href="#">Sign in</a>
+                  Already have an account? <Link to="/login">Login</Link>
                 </FieldDescription>
               </Field>
             </FieldGroup>

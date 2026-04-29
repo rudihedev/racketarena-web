@@ -2,7 +2,13 @@ import { LoginForm } from "@/components/auth/login-form"
 import { $api } from "@/modules/common/api"
 
 export function LoginRoute() {
-  const { mutate } = $api.useMutation("post", "/auth/login")
+  const { mutate } = $api.useMutation("post", "/auth/login", {
+    onSuccess: (responseLogin) => {
+      const { token } = responseLogin
+
+      console.log(token)
+    },
+  })
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
